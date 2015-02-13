@@ -80,7 +80,7 @@ mv $build_dir/dist $build_dir/api/public
 ####### Create a Procfile if possible
 
 rm $build_dir/Procfile
-echo "web: node api/server.js" > $build_dir/Procfile
+echo "web: NODE_ENV=production node api/server.js" > $build_dir/Procfile
 
 head "Checking startup method"
 ensure_procfile "$start_method" "$build_dir"
