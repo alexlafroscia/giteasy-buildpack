@@ -187,8 +187,8 @@ function build_dependencies() {
       info "$cache_status"
       info "Installing node modules"
       touch $build_dir/.npmrc
-      cat package.json
       npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+      ls node_modules/
     fi
   fi
 }
