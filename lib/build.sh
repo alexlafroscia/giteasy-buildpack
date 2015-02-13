@@ -124,10 +124,6 @@ install_node() {
   PATH=$heroku_dir/node/bin:$PATH
 }
 
-install_bower() {
-
-}
-
 install_iojs() {
   local iojs_engine=$1
 
