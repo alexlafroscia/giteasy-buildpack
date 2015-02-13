@@ -169,9 +169,9 @@ function build_dependencies() {
 
   elif [ "$modules_source" == "prebuilt" ]; then
     info "Rebuilding any native modules for this architecture"
-    npm rebuild 2>&1 | indent
+    npm rebuild | indent
     info "Installing any new modules"
-    npm install 2>&1 | indent
+    npm install | indent
 
   else
     cache_status=$(get_cache_status)
@@ -182,12 +182,12 @@ function build_dependencies() {
       info "Pruning unused dependencies"
       npm prune 2>&1 | indent
       info "Installing any new modules"
-      npm install 2>&1 | indent
+      npm install | indent
     else
       info "$cache_status"
       info "Installing node modules"
       touch $build_dir/.npmrc
-      npm install 2>&1 | indent
+      npm install | indent
     fi
   fi
 }
