@@ -188,7 +188,6 @@ function build_dependencies() {
       info "Installing node modules"
       touch $build_dir/.npmrc
       npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
-      ls node_modules/
     fi
   fi
 }
