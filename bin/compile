@@ -52,12 +52,6 @@ else
 fi
 install_npm
 
-####### Install Bower
-
-head "Installing bower which is required by other dependencies"
-npm install bower --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
-PATH=$build_dir/node_modules/bower/bin:$PATH
-
 ####### Build the project's dependencies
 
 head "Building dependencies"
@@ -67,6 +61,12 @@ build_dependencies
 # Add the project's and ember-cli's dependencies' binaries to the PATH
 PATH=$build_dir/node_modules/.bin:$PATH
 PATH=$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
+
+####### Install Bower
+
+head "Installing bower which is required by other dependencies"
+npm install bower --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+PATH=$build_dir/node_modules/bower/bin:$PATH
 
 head "Pruning cached bower dependencies not specified in bower.json"
 bower prune 2>&1 | indent
