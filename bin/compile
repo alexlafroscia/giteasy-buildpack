@@ -69,7 +69,7 @@ PATH=$build_dir/node_modules/.bin:$PATH
 PATH=$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
 
 head "Pruning cached bower dependencies not specified in bower.json"
-bower prune 2>&1 | indent
+$build_dir/node_modules/bower/bin/bower prune 2>&1 | indent
 
 $build_dir/node_modules/bower/bin/bower install --quiet | indent
 
