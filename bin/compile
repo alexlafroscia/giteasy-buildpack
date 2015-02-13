@@ -4,7 +4,7 @@
 
 set -o errexit    # always exit on error
 set -o errtrace   # trap errors in functions as well
-set -o pipefail   # don't ignore exit codes when piping output
+set -o pipefail   # dont ignore exit codes when piping output
 set -o posix      # more strict failures in subshells
 # set -x          # enable debugging
 
@@ -16,6 +16,7 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 heroku_dir=$build_dir/.heroku
 mkdir -p $heroku_dir/node
 warnings=$(mktemp)
+build_env=${EMBER_ENV:-production}
 
 # Load dependencies
 source $bp_dir/lib/common.sh
@@ -51,11 +52,31 @@ else
 fi
 install_npm
 
+####### Install Bower
+
+head "Installing bower which is required by other dependencies"
+npm install bower --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+PATH=$build_dir/node_modules/bower/bin:$PATH
+
 ####### Build the project's dependencies
 
 head "Building dependencies"
 cd $build_dir
 build_dependencies
+
+# Add the project's and ember-cli's dependencies' binaries to the PATH
+PATH=$build_dir/node_modules/.bin:$PATH
+PATH=$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
+
+head "Pruning cached bower dependencies not specified in bower.json"
+bower prune 2>&1 | indent
+
+bower install --quiet | indent
+
+head "Building Ember CLI application $build_env distribution"
+node_modules/ember-cli/bin/ember build --environment $build_env | indent
+
+cp $build_dir/dist $build_dir/api/public
 
 ####### Create a Procfile if possible
 
