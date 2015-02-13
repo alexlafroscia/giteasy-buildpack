@@ -171,7 +171,7 @@ function build_dependencies() {
     info "Rebuilding any native modules for this architecture"
     npm rebuild 2>&1 | indent
     info "Installing any new modules"
-    npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    npm install --userconfig $build_dir/.npmrc 2>&1 | indent
 
   else
     cache_status=$(get_cache_status)
@@ -182,12 +182,12 @@ function build_dependencies() {
       info "Pruning unused dependencies"
       npm prune 2>&1 | indent
       info "Installing any new modules"
-      npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+      npm install --userconfig $build_dir/.npmrc 2>&1 | indent
     else
       info "$cache_status"
       info "Installing node modules"
       touch $build_dir/.npmrc
-      npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+      npm install --userconfig $build_dir/.npmrc 2>&1 | indent
     fi
   fi
 }

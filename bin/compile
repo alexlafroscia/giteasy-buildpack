@@ -69,7 +69,7 @@ npm install bower --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 PATH=$build_dir/node_modules/bower/bin:$PATH
 
 head "Pruning cached bower dependencies not specified in bower.json"
-bower prune 2>&1 | indent
+bower prune --quiet 2>&1 | indent
 
 bower install --quiet | indent
 
