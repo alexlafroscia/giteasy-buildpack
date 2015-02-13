@@ -60,7 +60,6 @@ build_dependencies
 
 # Add the project's and ember-cli's dependencies' binaries to the PATH
 PATH=$build_dir/node_modules/.bin:$PATH
-ls $build_dir/node_modules/.bin
 PATH=$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
 
 ####### Install Bower
