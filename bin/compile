@@ -75,9 +75,12 @@ bower install --quiet | indent
 head "Building Ember CLI application $build_env distribution"
 ember build --environment $build_env | indent
 
-cp $build_dir/dist $build_dir/api/public
+mv $build_dir/dist $build_dir/api/public
 
 ####### Create a Procfile if possible
+
+rm $build_dir/Procfile
+echo "web: node api/auth.js" > $build_dir/Procfile
 
 head "Checking startup method"
 ensure_procfile "$start_method" "$build_dir"
