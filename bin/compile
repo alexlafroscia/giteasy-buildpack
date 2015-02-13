@@ -70,7 +70,7 @@ PATH=$build_dir/node_modules/bower/bin:$PATH
 
 head "Installing Bower dependencies"
 # bower prune --quiet 2>&1 | indent
-bower install --quiet | indent
+bower install --quiet 2>&1 | indent
 
 head "Building Ember CLI application $build_env distribution"
 ember build --environment $build_env | indent
