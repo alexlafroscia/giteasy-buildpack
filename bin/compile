@@ -68,13 +68,12 @@ head "Installing bower which is required by other dependencies"
 npm install bower --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 PATH=$build_dir/node_modules/bower/bin:$PATH
 
-head "Pruning cached bower dependencies not specified in bower.json"
+head "Installing Bower dependencies"
 bower prune --quiet 2>&1 | indent
-
 bower install --quiet | indent
 
 head "Building Ember CLI application $build_env distribution"
-$build_dir/node_modules/ember-cli/bin/ember build --environment $build_env | indent
+ember build --environment $build_env | indent
 
 cp $build_dir/dist $build_dir/api/public
 
