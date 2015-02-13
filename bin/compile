@@ -71,10 +71,10 @@ PATH=$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
 head "Pruning cached bower dependencies not specified in bower.json"
 bower prune 2>&1 | indent
 
-bower install --quiet | indent
+$build_dir/node_modules/bower/bin/bower install --quiet | indent
 
 head "Building Ember CLI application $build_env distribution"
-node_modules/ember-cli/bin/ember build --environment $build_env | indent
+$build_dir/node_modules/ember-cli/bin/ember build --environment $build_env | indent
 
 cp $build_dir/dist $build_dir/api/public
 
